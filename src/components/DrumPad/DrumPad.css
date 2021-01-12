@@ -1,0 +1,11 @@
+.pad-container{
+
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	justify-items: center;
+	align-items: center;
+	width: 400px;
+	height: 350px;
+	flex-wrap: wrap;
+
+}

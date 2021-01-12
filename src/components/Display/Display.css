@@ -1,0 +1,12 @@
+#display{
+	width: 306px;
+height: 100px;
+background: #644C4C;
+mix-blend-mode: multiply;
+border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: xx-large;
+color: #ffffff;
+}
