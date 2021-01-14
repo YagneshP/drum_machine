@@ -1,31 +1,59 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import KeyContext from "../../../context/KeyContext"
+import React, {  useEffect, useRef } from 'react';
+import {useGlobal,pressKey} from "../../../context/GlobalState"
+
 import "./DrumItem.css"
-function DrumItem(props) {
+function DrumItem (props) {
 	const audioRef = useRef(null);
-const keyContext = useContext(KeyContext);
-	const {pad} = props;
+	const [globalState,globalDispatch]= useGlobal();
+	const {padKey} = props;
+	const{currentClip} = globalState
 useEffect(()=>{
-	if(keyContext.key){
-
-	if(keyContext.key.toUpperCase() === audioRef.current.id){
-			audioRef.current.play();
-		}
-	}
-},[keyContext.key])
-
+	if(currentClip){
+	if(currentClip.length > 0 ){
+			if(audioRef.current.id === currentClip[0].name){
+				audioRef.current.play()
+			}
+		}	
+	}  
+},[currentClip])
 	const handleClick = () =>{
-		keyContext.changeKey(audioRef.current.id)
 	audioRef.current.play();
-	console.log(keyContext.changeKey);
+	pressKey(globalDispatch, audioRef.current.id);
 	}
-
-	return (
-		<div className="drum-pad"  onClick={handleClick} >
-			{pad.name}
-			<audio src={pad.audio} ref={audioRef} className="clip" id={pad.name} ></audio>
-		</div>
-	)
+	return (<div className="drum-pad" key={padKey.name} onClick={handleClick} >
+	{padKey.name}
+	<audio src={padKey.audio} ref={audioRef} className="clip" id={padKey.name} ></audio>
+	</div> )
+	
 }
 
-export default DrumItem
+export default DrumItem;
+
+
+
+// const keyContext = useContext(KeyContext);
+// useEffect(()=>{
+// 	if(keyContext.key){
+
+// 	if(keyContext.key.toUpperCase() === audioRef.current.id){
+// 		audioRef.current.src = music
+// 			audioRef.current.play();
+// 		}
+// 	}
+
+// },[keyContext.key])
+
+
+// useEffect(()=>{
+	// if(globalState.currentClip){
+	// 	console.log(globalState.currentClip[0].name);
+	// 	if(audioRef.current.id === globalState.currentClip[0].name )
+	// 	audioRef.current.src = globalState.currentClip[0].audio;
+	// 	audioRef.current.play();
+	// 	console.log(audioRef.current)
+	// }
+
+	// const curAudio = document.getElementById(`${globalState.currentClip[0].name}`)
+	// curAudio.play();
+		
+// },[globalState.currentClip])

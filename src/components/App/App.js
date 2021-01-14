@@ -1,23 +1,22 @@
-import React,{ useEffect, useState } from "react";
+import React,{ useEffect } from "react";
 import DrumBox from "../DrumBox/DrumBox";
-import KeyContext from "../../context/KeyContext"
+import  { useGlobal, pressKey } from "../../context/GlobalState"
 import "./App.css"
 function App() {
-	const[pressedKey, setPressedKey] = useState();
-	
-useEffect(()=>{
-	document.addEventListener("keydown", (event) =>{
-		setPressedKey(event.key)
-	})
 
-},[])
+	const globalDispatch= useGlobal()[1];
+	useEffect(()=>{
+		const handleKeyDown = (event) => {
+				pressKey(globalDispatch, event.key);
+			}
+		document.addEventListener("keydown", (event) => {handleKeyDown(event)})
+		document.removeEventListener("keydown", (event) => {handleKeyDown(event)})
+		return ()=>{ document.removeEventListener("keyd", (event) => {handleKeyDown(event)})}
+	},[globalDispatch])
 
   return (
     <div className="App"  >
-			<KeyContext.Provider value={{key: pressedKey, changeKey: (val)=>{setPressedKey(val)}}}>
-			     <DrumBox />
-			</KeyContext.Provider>
-			
+				<DrumBox />
     </div>
   );
 }

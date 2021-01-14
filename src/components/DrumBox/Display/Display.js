@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import "./Display.css";
-import KeyContext from "../../../context/KeyContext"
+import {useGlobal} from "../../../context/GlobalState"
 function Display() {
-	const keyContext = useContext(KeyContext)
+const globalState = useGlobal()[0];
+const { currentClip} = globalState;
+
 	return (
 		<div id="display">
-			{keyContext.key}
+			{currentClip ? (currentClip.length > 0 ? currentClip[0].clipName.toUpperCase() : null):null}
 		</div>
 	)
 }
