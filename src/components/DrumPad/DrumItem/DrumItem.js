@@ -20,7 +20,7 @@ useEffect(()=>{
 	audioRef.current.play();
 	pressKey(globalDispatch, audioRef.current.id);
 	}
-	return (<div className="drum-pad" key={padKey.name} onClick={handleClick} >
+	return (<div className="drum-pad" id={padKey.clipName} onClick={handleClick} >
 	{padKey.name}
 	<audio src={padKey.audio} ref={audioRef} className="clip" id={padKey.name} ></audio>
 	</div> )

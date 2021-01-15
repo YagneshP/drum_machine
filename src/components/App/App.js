@@ -11,7 +11,7 @@ function App() {
 			}
 		document.addEventListener("keydown", (event) => {handleKeyDown(event)})
 		document.removeEventListener("keydown", (event) => {handleKeyDown(event)})
-		return ()=>{ document.removeEventListener("keyd", (event) => {handleKeyDown(event)})}
+		return ()=>{ document.removeEventListener("keydown", (event) => {handleKeyDown(event)})}
 	},[globalDispatch])
 
   return (

@@ -1,6 +1,7 @@
 .Drum_Box{
-	width: 850px;
+	width: 80vw;
 	height: 400px;
+	min-width: 550px;
 	background: rgba(249, 240, 240, 0.88);
 	background-blend-mode: lighten;
 	border-radius: 30px;
